@@ -51,7 +51,7 @@ function createTimeOutEvent(dateStamp){
 } 
 
 function wagesEarnedOnDate(date) {
-    const hoursWorked = this.hoursWorkedOnDate(date);
+    const hoursWorked = hoursWorkedOnDate.call(this,date);
     return hoursWorked * this.payPerHour;
 }
 
@@ -60,7 +60,9 @@ function findEmployeeByFirstName(srcArray, firstName) {
 } 
 
 function calculatePayroll(employeeRecords) {
-    return employeeRecords.reduce((totalPayroll, employee) => totalPayroll + employee.allWagesFor(), 0);
+    return employeeRecords.reduce((total, employee) => {
+        return total + allWagesFor.call(employee)
+    },0)
 }
 
 
